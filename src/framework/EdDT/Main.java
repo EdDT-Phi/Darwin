@@ -1,4 +1,4 @@
-package framework.EdDT;
+package src.framework.EdDT;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
