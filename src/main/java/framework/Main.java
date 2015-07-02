@@ -6,9 +6,9 @@ import javax.swing.JPanel;
 import main.java.ecosystem.*;
 
 public class Main {
-	static JFrame f = new JFrame("Darwinism Beta");
-	private static boolean animations = true, running = true;
-	public static int FRAME_Y = 900, FRAME_X = 750, EDGE = 100;
+	static JFrame frame = new JFrame("Darwinism Beta");
+	private static boolean animations = false, running = true;
+	public static int FRAME_Y = 900, FRAME_X = 1500, EDGE = 100;
 	static JPanel pane;
 
 	public static void main(String args[]) {
@@ -20,17 +20,17 @@ public class Main {
 	}
 
 	public static void setFrame() {
-		f.setSize(FRAME_X, FRAME_Y);
+        frame.setSize(FRAME_X, FRAME_Y);
 		pane = new Display();
-		f.add(pane);
-		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.addMouseListener(new myML());
-		f.addKeyListener(new myKL());
+        frame.add(pane);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addMouseListener(new myML());
+        frame.addKeyListener(new myKL());
 	}
 
 	public static void init() {
-		Ecosystem.addOrgs();
+		Ecosystem.init();
 	}
 
 	public static void run() {
@@ -40,8 +40,12 @@ public class Main {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			update();
 			pane.repaint();
+            update();
+
+            if(Ecosystem.getBlue().size() + Ecosystem.getRed().size() +Ecosystem.getYellow().size() +Ecosystem.getOrange().size() == 0) {
+                init();
+            }
 		}
 	}
 

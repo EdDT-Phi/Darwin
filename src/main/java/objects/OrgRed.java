@@ -17,7 +17,7 @@ public class OrgRed extends Organism {
 		attack = r.nextInt(5) + 8;
 		defense = r.nextInt(5) + 8;
 
-		instantiate();
+		instantiate(Organism.RED);
 	}
 
 	public OrgRed(OrgRed org1, OrgRed org2) {
@@ -43,16 +43,7 @@ public class OrgRed extends Organism {
 			attack = org2.attack;
 		}
 
-		instantiate();
-	}
-
-	public void instantiate() {
-		species = 3;
-
-		life = new LifeForce(species);
-
-		size = attack + defense;
-		eUse = (speed + size) * 10;
+		instantiate(Organism.RED);
 	}
 
 	public void attack() {

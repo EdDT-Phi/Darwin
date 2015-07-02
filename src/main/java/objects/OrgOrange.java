@@ -13,11 +13,11 @@ public class OrgOrange extends Organism {
 
 		Random r = new Random();
 
-		speed = r.nextInt(5) + 10;
+		speed = r.nextInt(5) + 8;
 		attack = r.nextInt(5) + 10;
 		defense = r.nextInt(5) + 2;
 
-		instantiate();
+		instantiate(Organism.ORANGE);
 	}
 
 	public OrgOrange(OrgOrange org1, OrgOrange org2) {
@@ -43,7 +43,7 @@ public class OrgOrange extends Organism {
 			attack = org2.attack;
 		}
 
-		instantiate();
+		instantiate(Organism.ORANGE);
 	}
 
 

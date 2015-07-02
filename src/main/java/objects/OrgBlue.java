@@ -17,7 +17,7 @@ public class OrgBlue extends Organism {
 		attack = r.nextInt(3) + 1;
 		defense = r.nextInt(3) + 1;
 
-		instantiate();
+		instantiate(Organism.BLUE);
 	}
 
 	public OrgBlue(OrgBlue org1, OrgBlue org2) {
@@ -41,24 +41,14 @@ public class OrgBlue extends Organism {
 		} else {
 			attack = org2.attack;
 		}
-		instantiate();
-	}
-
-	public void instantiate() {
-		life = new LifeForce(2);
-
-		species = 2;
-
-		size = attack + defense;
-		eUse = (speed + size) * 5;
-
-		sight = 100;
+		instantiate(Organism.BLUE);
 	}
 
 	public void closeTo(Organism org) {
 		if (species == org.species) {
 			breed(org);
-		}
+
+        }
 	}
 
 	public void move() {
@@ -87,14 +77,14 @@ public class OrgBlue extends Organism {
 		int dist = 1000;
 		for (Organism g : Ecosystem.getGreen()) {
 			if (getDist(g) < dist) {
-				target = (OrgGreen) g;
+				target = g;
 				dist = getDist(g);
 			}
 		}
 
 		if (!(target == null)) {
 			if (getDist(target) < 20) {
-				life.getFrom(target, 500);
+				life.getFrom(target, 1000);
 			} else {
 				int x = posX - target.posX;
 				int y = posY - target.posY;

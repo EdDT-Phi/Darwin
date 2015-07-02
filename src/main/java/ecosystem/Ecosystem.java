@@ -7,7 +7,7 @@ import main.java.framework.*;
 
 public class Ecosystem {
 
-	private static int energy = 1000000000;
+	private static int energy;
 	private static ArrayList<ArrayList<Organism>> organisms = new ArrayList<>();
 	private static ArrayList<Organism> a;
 	private static ArrayList<Organism> gOrgs;
@@ -17,7 +17,9 @@ public class Ecosystem {
 	private static ArrayList<Organism> oOrgs;
 	private static int[] amount = new int[] { 20, 200, 40, 50, 20 };
 
-	public static void addOrgs() {
+	public static void init() {
+
+        energy = 100000000;
 
 		a = new ArrayList<>();
 
@@ -50,8 +52,8 @@ public class Ecosystem {
             energy -= Organism.lifeForces[Organism.YELLOW];
 		}
 		for (int i = 0; i < amount[4]; i++) {
-			oOrgs.add(new OrgOrange());
-            energy -= Organism.lifeForces[Organism.ORANGE];
+			//oOrgs.add(new OrgOrange());
+            //energy -= Organism.lifeForces[Organism.ORANGE];
 		}
 	}
 
@@ -169,7 +171,7 @@ public class Ecosystem {
                     oOrgs.add(org);
                     break;
                 default:
-                    System.out.println("??");
+                    System.out.println(org.species + "??");
             }
 		}
 		a.clear();

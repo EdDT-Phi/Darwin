@@ -12,7 +12,7 @@ public class Organism {
 	double movX, movY;
 	public LifeForce life;
     public static final int GREEN = 0, BLUE = 1, RED = 2, YELLOW = 3, ORANGE = 4;
-    public static int[] lifeForces = new int[] { 1000000, 5000, 50000, 20000, 100000};
+    public static int[] lifeForces = new int[] { 100000, 5000, 50000, 20000, 100000};
 
     public Organism() {
 
@@ -22,10 +22,14 @@ public class Organism {
 		posY = r.nextInt(Main.FRAME_Y - Main.EDGE * 2) + Main.EDGE;
 	}
     public void instantiate(int species) {
-        life = new LifeForce(species);
+        life = new LifeForce(lifeForces[species]);
+
+        this.species = species;
 
         size = attack + defense;
         eUse = (speed + size) * 10;
+
+        sight = 100;
     }
 
 
@@ -35,19 +39,29 @@ public class Organism {
 			posX += movX * speed / val;
 			posY += movY * speed / val;
 		}
+
+
+        action(1);
 		if (posX < Main.EDGE) {
-			posX = Main.EDGE;
+            // posX = Main.FRAME_X - Main.EDGE;
+            //posX = Main.FRAME_X / 2;
+            life.kill();
 		}
 		if (posY < Main.EDGE) {
-			posY = Main.EDGE;
+			// posY =  Main.FRAME_Y - Main.EDGE;
+             life.kill();
+            // posX = Main.FRAME_Y / 2;
 		}
 		if (posX > Main.FRAME_X - Main.EDGE) {
-			posX = Main.FRAME_X - Main.EDGE;
+			// posX = Main.EDGE;
+//            posX = Main.FRAME_X / 2;
+            life.kill();
 		}
 		if (posY > Main.FRAME_Y - Main.EDGE) {
-			posY = Main.FRAME_Y - Main.EDGE;
+//			posY = Main.EDGE;
+//            posX = Main.FRAME_Y / 2;
+            life.kill();
 		}
-		action(1);
 
 		movX = 0;
 		movY = 0;
@@ -68,6 +82,16 @@ public class Organism {
 			org.life.useForceBreed();
 			baby(org);
 		}
+
+        double distX = Math.abs(posX-org.posX);
+        if(distX < 10){
+            posX += 5 * (posX-org.posX)/distX;
+        }
+
+        double distY = Math.abs(posY-org.posY);
+        if(distY < 10){
+            posY += 5 * (posY-org.posY)/distY;
+        }
 	}
 
 	public int getDmg(Organism org) {

@@ -15,9 +15,9 @@ public class OrgYellow extends Organism {
 
 		speed = r.nextInt(5) + 7;
 		attack = r.nextInt(5) + 4;
-		defense = r.nextInt(5) + 5;
+		defense = r.nextInt(5) + 6;
 
-		instantiate();
+		instantiate(Organism.YELLOW);
 	}
 
 	public OrgYellow(OrgYellow org1, OrgYellow org2) {
@@ -43,16 +43,7 @@ public class OrgYellow extends Organism {
 			attack = org2.attack;
 		}
 
-		instantiate();
-	}
-
-	public void instantiate() {
-		species = 4;
-
-		life = new LifeForce(species);
-
-		size = attack + defense;
-		eUse = (speed + size) * 10;
+		instantiate(Organism.YELLOW);
 	}
 
 	public void attack() {

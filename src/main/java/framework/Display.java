@@ -9,13 +9,11 @@ import javax.swing.JPanel;
 import main.java.objects.*;
 import main.java.ecosystem.*;
 
-@SuppressWarnings("serial")
 public class Display extends JPanel {
 
-	static ArrayList<Animation> anims = new ArrayList<Animation>();
-	public static int total, lastT;
+	static ArrayList<Animation> anims = new ArrayList<>();
+	public static int total;
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void paintComponent(Graphics g) {
 		g.setColor(Color.black);
@@ -23,27 +21,25 @@ public class Display extends JPanel {
 
 		total = 0;
 
-		for (int i = 0; i < Ecosystem.getAll().size(); i++) {
-			ArrayList orgs = Ecosystem.getAll().get(i);
-			for (int j = 0; j < orgs.size(); j++) {
-				Organism org = (Organism) orgs.get(j);
+		for (ArrayList<Organism> orgs: Ecosystem.getAll()) {
+			for (Organism org: orgs) {
 				total += org.life.get();
 				switch (org.species) {
-				case 1:
-					g.setColor(Color.green);
-					break;
-				case 2:
-					g.setColor(Color.blue);
-					break;
-				case 3:
-					g.setColor(Color.red);
-					break;
-				case 4:
-					g.setColor(Color.yellow);
-					break;
-				case 5:
-					g.setColor(Color.orange);
-					break;
+                    case Organism.GREEN:
+                        g.setColor(Color.green);
+                        break;
+                    case Organism.BLUE:
+                        g.setColor(Color.blue);
+                        break;
+                    case Organism.RED:
+                        g.setColor(Color.red);
+                        break;
+                    case Organism.YELLOW:
+                        g.setColor(Color.yellow);
+                        break;
+                    case Organism.ORANGE:
+                        g.setColor(Color.orange);
+                        break;
 				}
 				drawOrg(org, g);
 			}
@@ -62,18 +58,15 @@ public class Display extends JPanel {
 		drawStats(g);
 	}
 
-	public static void addAnim(Animation anim) {
-		if (Main.animations) {
-			anims.add(anim);
-		}
-	}
+//	public static void addAnim(Animation anim) {
+//		if (Main.animations) {
+//			anims.add(anim);
+//		}
+//	}
 
 	public static void drawOrg(Organism org, Graphics g) {
-		int size = 15;
-
-		if (org.species == 1) {
-			size = 5;
-		}
+        double[] weight = {1,1,.5,.5,.5};
+        int size = (int) Math.floor(org.size * weight[org.species]);
 
 		if (Debug.active) {
 			if (org.species > 2)
