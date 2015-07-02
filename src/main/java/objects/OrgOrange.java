@@ -1,9 +1,8 @@
-package objects.EdDT;
+package main.java.objects;
 
 import java.util.Random;
 
-import ecosystem.EdDT.Ecosystem;
-import ecosystem.EdDT.LifeForce;
+import main.java.ecosystem.*;
 
 public class OrgOrange extends Organism {
 
@@ -47,14 +46,7 @@ public class OrgOrange extends Organism {
 		instantiate();
 	}
 
-	public void instantiate() {
-		species = 5;
 
-		life = new LifeForce(species);
-
-		size = attack + defense;
-		eUse = (speed + size) * 10;
-	}
 
 	public void attack() {
 		int dmg = getDmg(target);

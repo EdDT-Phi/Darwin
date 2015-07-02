@@ -1,6 +1,6 @@
-package objects.EdDT;
+package main.java.objects;
 
-import ecosystem.EdDT.LifeForce;
+import main.java.ecosystem.*;
 
 public class OrgGreen extends Organism {
 

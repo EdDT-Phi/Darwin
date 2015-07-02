@@ -1,27 +1,27 @@
-package objects.EdDT;
+package main.java.objects;
 
 import java.util.Random;
 
-import ecosystem.EdDT.Ecosystem;
-import ecosystem.EdDT.LifeForce;
+import main.java.ecosystem.*;
 
-public class OrgBlue extends Organism {
+public class OrgRed extends Organism {
 
-	Organism target;
+	private Organism target;
 
-	public OrgBlue() {
+	public OrgRed() {
 		super();
 
 		Random r = new Random();
 
-		speed = r.nextInt(5) + 2;
-		attack = r.nextInt(3) + 1;
-		defense = r.nextInt(3) + 1;
+		speed = r.nextInt(5) + 5;
+		attack = r.nextInt(5) + 8;
+		defense = r.nextInt(5) + 8;
 
 		instantiate();
 	}
 
-	public OrgBlue(OrgBlue org1, OrgBlue org2) {
+	public OrgRed(OrgRed org1, OrgRed org2) {
+
 		Random r = new Random();
 
 		posX = (org1.posX + org2.posX) / 2;
@@ -42,18 +42,23 @@ public class OrgBlue extends Organism {
 		} else {
 			attack = org2.attack;
 		}
+
 		instantiate();
 	}
 
 	public void instantiate() {
-		life = new LifeForce(2);
+		species = 3;
 
-		species = 2;
+		life = new LifeForce(species);
 
 		size = attack + defense;
-		eUse = (speed + size) * 5;
+		eUse = (speed + size) * 10;
+	}
 
-		sight = 100;
+	public void attack() {
+		int dmg = getDmg(target);
+
+			life.getFrom(target, dmg);
 	}
 
 	public void closeTo(Organism org) {
@@ -63,19 +68,7 @@ public class OrgBlue extends Organism {
 	}
 
 	public void move() {
-
-		for (Organism org : Ecosystem.getRed()) {
-			if (getDist(org) < 50) {
-				int x = posX - org.posX;
-				int y = posY - org.posY;
-				double d = Math.sqrt(x * x + y * y);
-
-				movX += 10 * (x / d);
-				movY += 10 * (y / d);
-			}
-		}
-
-		for (Organism org : Ecosystem.getYellow()) {
+		for (Organism org : Ecosystem.getOrange()) {
 			if (getDist(org) < sight) {
 				int x = posX - org.posX;
 				int y = posY - org.posY;
@@ -85,17 +78,23 @@ public class OrgBlue extends Organism {
 				movY += 10 * (y / d);
 			}
 		}
+
 		int dist = 1000;
-		for (Organism g : Ecosystem.getGreen()) {
+		for (Organism g : Ecosystem.getBlue()) {
 			if (getDist(g) < dist) {
-				target = (OrgGreen) g;
+				target = g;
 				dist = getDist(g);
 			}
 		}
-
+		for (Organism g : Ecosystem.getYellow()) {
+			if (getDist(g) < dist) {
+				target = g;
+				dist = getDist(g);
+			}
+		}
 		if (!(target == null)) {
 			if (getDist(target) < 20) {
-				life.getFrom(target, 500);
+				attack();
 			} else {
 				int x = posX - target.posX;
 				int y = posY - target.posY;
@@ -113,6 +112,6 @@ public class OrgBlue extends Organism {
 	}
 
 	public void baby(Organism org) {
-		Ecosystem.addOrg(new OrgBlue(this, (OrgBlue) org));
+		Ecosystem.addOrg(new OrgRed(this, (OrgRed) org));
 	}
 }

@@ -1,4 +1,4 @@
-package framework.EdDT;
+package main.java.framework;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import objects.EdDT.Organism;
-import ecosystem.EdDT.Ecosystem;
+import main.java.objects.*;
+import main.java.ecosystem.*;
 
 @SuppressWarnings("serial")
 public class Display extends JPanel {

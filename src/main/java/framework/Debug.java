@@ -1,4 +1,4 @@
-package framework.EdDT;
+package main.java.framework;
 
 import java.util.ArrayList;
 

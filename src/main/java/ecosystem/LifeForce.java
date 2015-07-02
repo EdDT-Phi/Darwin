@@ -1,15 +1,14 @@
-package ecosystem.EdDT;
+package main.java.ecosystem;
 
-import objects.EdDT.Organism;
+import main.java.objects.*;
 
 public class LifeForce {
 
-	public static int[] lifeForces = new int[] { 1000000, 5000, 50000, 20000, 100000};
-	private int lifeForce, species;
+	private int lifeForce, startEnergy;
 
-	public LifeForce(int species) {
-		lifeForce = lifeForces[species - 1];
-		this.species = species - 1;
+	public LifeForce(int energy) {
+		lifeForce = energy;
+		startEnergy = energy;
 	}
 
 	public int get() {
@@ -22,14 +21,16 @@ public class LifeForce {
 	}
 
 	public boolean canBreed() {
-		return lifeForce > lifeForces[species] * 1.5
-				&& Ecosystem.getAll().get(species).size() + Ecosystem.getQ().size() < 1000;
+		return lifeForce > startEnergy * 1.5;
 	}
 
 	public void useForceBreed() {
-		lifeForce -= lifeForces[species] / 2;
-		Ecosystem.giveBack(lifeForces[species] / 4);
-		lifeForce -= lifeForces[species] / 4;
+        // give half of startEnergy to new Organism
+		lifeForce -= startEnergy / 2;
+
+        // lose another fourth because breeding process
+		Ecosystem.giveBack(startEnergy / 4);
+		lifeForce -= startEnergy / 4;
 	}
 
 	public void getFrom(Organism from, int n) {

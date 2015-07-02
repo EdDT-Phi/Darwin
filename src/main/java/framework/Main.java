@@ -1,13 +1,13 @@
-package src.framework.EdDT;
+package main.java.framework;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ecosystem.EdDT.Ecosystem;
+import main.java.ecosystem.*;
 
 public class Main {
 	static JFrame f = new JFrame("Darwinism Beta");
-	public static boolean animations = true, running = true;
+	private static boolean animations = true, running = true;
 	public static int FRAME_Y = 900, FRAME_X = 750, EDGE = 100;
 	static JPanel pane;
 
@@ -55,4 +55,8 @@ public class Main {
 		System.out.println("Dafuq");
 		Debug.print();
 	}
+
+    public static void stop() {
+        running = false;
+    }
 }

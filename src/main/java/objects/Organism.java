@@ -1,9 +1,9 @@
-package objects.EdDT;
+package main.java.objects;
 
 import java.util.Random;
 
-import ecosystem.EdDT.LifeForce;
-import framework.EdDT.Main;
+import main.java.ecosystem.*;
+import main.java.framework.*;
 
 public class Organism {
 
@@ -11,14 +11,23 @@ public class Organism {
 			sight = 100;
 	double movX, movY;
 	public LifeForce life;
+    public static final int GREEN = 0, BLUE = 1, RED = 2, YELLOW = 3, ORANGE = 4;
+    public static int[] lifeForces = new int[] { 1000000, 5000, 50000, 20000, 100000};
 
-	public Organism() {
+    public Organism() {
 
 		Random r = new Random();
 
 		posX = r.nextInt(Main.FRAME_X - Main.EDGE * 2) + Main.EDGE;
 		posY = r.nextInt(Main.FRAME_Y - Main.EDGE * 2) + Main.EDGE;
 	}
+    public void instantiate(int species) {
+        life = new LifeForce(species);
+
+        size = attack + defense;
+        eUse = (speed + size) * 10;
+    }
+
 
 	public void update() {
 		double val = Math.sqrt(movX * movX + movY * movY);
@@ -70,7 +79,7 @@ public class Organism {
 		System.out.println("Oops!! Organism attack?? Nu-uh");
 	}
 
-	public void move(Organism org) {
+	public void move() {
 		System.out.println("Oops!! Organism move?? Nu-uh");
 	}
 

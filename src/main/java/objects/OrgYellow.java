@@ -1,27 +1,26 @@
-package objects.EdDT;
+package main.java.objects;
 
 import java.util.Random;
 
-import ecosystem.EdDT.Ecosystem;
-import ecosystem.EdDT.LifeForce;
+import main.java.ecosystem.*;
 
-public class OrgRed extends Organism {
+public class OrgYellow extends Organism {
 
-	private Organism target;
+	Organism target;
 
-	public OrgRed() {
+	public OrgYellow() {
 		super();
 
 		Random r = new Random();
 
-		speed = r.nextInt(5) + 5;
-		attack = r.nextInt(5) + 8;
-		defense = r.nextInt(5) + 8;
+		speed = r.nextInt(5) + 7;
+		attack = r.nextInt(5) + 4;
+		defense = r.nextInt(5) + 5;
 
 		instantiate();
 	}
 
-	public OrgRed(OrgRed org1, OrgRed org2) {
+	public OrgYellow(OrgYellow org1, OrgYellow org2) {
 
 		Random r = new Random();
 
@@ -48,7 +47,7 @@ public class OrgRed extends Organism {
 	}
 
 	public void instantiate() {
-		species = 3;
+		species = 4;
 
 		life = new LifeForce(species);
 
@@ -58,8 +57,7 @@ public class OrgRed extends Organism {
 
 	public void attack() {
 		int dmg = getDmg(target);
-
-			life.getFrom(target, dmg);
+		life.getFrom(target, dmg);
 	}
 
 	public void closeTo(Organism org) {
@@ -69,6 +67,17 @@ public class OrgRed extends Organism {
 	}
 
 	public void move() {
+		for (Organism org : Ecosystem.getRed()) {
+			if (getDist(org) < 50) {
+				int x = posX - org.posX;
+				int y = posY - org.posY;
+				double d = Math.sqrt(x * x + y * y);
+
+				movX += 10 * (x / d);
+				movY += 10 * (y / d);
+			}
+		}
+
 		for (Organism org : Ecosystem.getOrange()) {
 			if (getDist(org) < sight) {
 				int x = posX - org.posX;
@@ -87,12 +96,7 @@ public class OrgRed extends Organism {
 				dist = getDist(g);
 			}
 		}
-		for (Organism g : Ecosystem.getYellow()) {
-			if (getDist(g) < dist) {
-				target = g;
-				dist = getDist(g);
-			}
-		}
+
 		if (!(target == null)) {
 			if (getDist(target) < 20) {
 				attack();
@@ -105,7 +109,6 @@ public class OrgRed extends Organism {
 				movX = -(x / d);
 				movY = -(y / d);
 			}
-
 			if (target.life.get() <= 0) {
 				target = null;
 			}
@@ -113,6 +116,6 @@ public class OrgRed extends Organism {
 	}
 
 	public void baby(Organism org) {
-		Ecosystem.addOrg(new OrgRed(this, (OrgRed) org));
+		Ecosystem.addOrg(new OrgYellow(this, (OrgYellow) org));
 	}
 }
