@@ -1,0 +1,3 @@
+Make amount of energy affect size
+Make them seek to reproduce after they are "full"
+Fix boundaries
