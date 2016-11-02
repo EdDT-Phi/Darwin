@@ -16,20 +16,22 @@ public class OrgBlue extends Organism {
     instantiate(Organism.BLUE);
   }
 
-  public OrgBlue(OrgBlue org1, OrgBlue org2) {
+  private OrgBlue(OrgBlue org1, OrgBlue org2) {
     mixnmatch(org1, org2);
     instantiate(Organism.BLUE);
   }
 
-  public void closeTo(Organism org) {
+  protected void closeTo(Organism org) {
     if (species == org.species) {
       breed(org);
     }
   }
 
+  protected void attack() {}
+
 
   // O(n^2) D:
-  public void move() {
+  protected void move() {
 
     for (Organism org : Ecosystem.getRed()) {
       if (getDist(org) < 50) {
@@ -79,7 +81,7 @@ public class OrgBlue extends Organism {
     }
   }
 
-  public void baby(Organism org) {
+  protected void baby(Organism org) {
     Ecosystem.addOrg(new OrgBlue(this, (OrgBlue) org));
   }
 }

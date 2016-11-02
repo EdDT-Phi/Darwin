@@ -3,22 +3,12 @@ import java.awt.event.KeyListener;
 
 public class myKL implements KeyListener {
 
-  @Override
-  public void keyPressed(KeyEvent arg0) {
-    // TODO Auto-generated method stub
+  public void keyPressed(KeyEvent arg0) {}
 
-  }
-
-  @Override
   public void keyReleased(KeyEvent arg0) {
     // TODO make space restart simulation
 
   }
 
-  @Override
-  public void keyTyped(KeyEvent arg0) {
-    // TODO Auto-generated method stub
-
-  }
-
+  public void keyTyped(KeyEvent arg0) {}
 }

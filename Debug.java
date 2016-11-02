@@ -2,16 +2,14 @@ import java.util.ArrayList;
 
 public class Debug {
   public static boolean active = false;
-  @SuppressWarnings("rawtypes")
-  private static ArrayList<ArrayList> values = new ArrayList<ArrayList>();
+  private static ArrayList<ArrayList<Double>> values = new ArrayList<ArrayList<Double>>();
   private static int current = -1;
 
-  @SuppressWarnings("unchecked")
-  public static void addValue(Object o) {
+  public static void addValue(double d) {
     if (current == -1) {
       endRow();
     }
-    values.get(current).add(o);
+    values.get(current).add(d);
   }
 
   public static void endRow() {

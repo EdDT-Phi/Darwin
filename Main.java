@@ -4,18 +4,18 @@ import javax.swing.JPanel;
 public class Main {
   static JFrame frame = new JFrame("Darwinism Beta");
   private static boolean animations = false, running = true;
-  public static int FRAME_Y = 900, FRAME_X = 1500, EDGE = 100;
+  public static final int FRAME_Y = 900, FRAME_X = 1500, EDGE = 100;
   static JPanel pane;
 
   public static void main(String args[]) {
-    setFrame();
+    if(args.length != 0) Debug.active = args[0].equals("--debug");
     init();
     running = true;
     run();
     end();
   }
 
-  public static void setFrame() {
+  public static void init() {
     frame.setSize(FRAME_X, FRAME_Y);
     pane = new Display();
     frame.add(pane);
@@ -23,9 +23,7 @@ public class Main {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.addMouseListener(new myML());
     frame.addKeyListener(new myKL());
-  }
 
-  public static void init() {
     Ecosystem.init();
   }
 

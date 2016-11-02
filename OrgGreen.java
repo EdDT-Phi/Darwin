@@ -5,4 +5,9 @@ public class OrgGreen extends Organism {
     instantiate(Organism.GREEN);
     size = 2;
   }
+
+  protected void baby(Organism mate) {}
+  protected void closeTo(Organism mate) {}
+  protected void move() {}
+  protected void attack() {}
 }

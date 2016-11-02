@@ -8,14 +8,16 @@ public class Display extends JPanel {
 
   static ArrayList<Animation> anims = new ArrayList<>();
   public static int total;
+  private static final double[] ORG_SIZE_WEIGHTS = {1,1,.5,.5,.5};
+  private static int LENGTH = 2500;
+  private static int WIDTH = 1000;
 
   @Override
   public void paintComponent(Graphics g) {
     g.setColor(Color.black);
-    g.fillRect(0, 0, 2500, 1000);
+    g.fillRect(0, 0, LENGTH, WIDTH);
 
     total = 0;
-
     for (ArrayList<Organism> orgs: Ecosystem.getAll()) {
       for (Organism org: orgs) {
         total += org.life.get();
@@ -51,19 +53,13 @@ public class Display extends JPanel {
       }
     }
     drawStats(g);
-    Main.update();
 
+    // Couldn't figure out the race conditions
+    Main.update();
   }
 
-//  public static void addAnim(Animation anim) {
-//    if (Main.animations) {
-//      anims.add(anim);
-//    }
-//  }
-
   public static void drawOrg(Organism org, Graphics g) {
-    double[] weight = {1,1,.5,.5,.5};
-    int size = (int) Math.floor(org.size * weight[org.species]);
+    int size = (int) Math.floor(org.size * ORG_SIZE_WEIGHTS[org.species]);
 
     if (Debug.active) {
       if (org.species > 2)

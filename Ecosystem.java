@@ -9,10 +9,9 @@ public class Ecosystem {
   private static int[] amount = new int[] { 20, 200, 40, 50, 20 };
   private static int[] lifeForces = { 100000, 5000, 50000, 20000, 100000};
 
-
   public static void init() {
 
-        energy = 100000000;
+    energy = 100000000;
 
     a = new ArrayList<>();
 
@@ -151,29 +150,30 @@ public class Ecosystem {
   public static void addNew() {
     for (Organism org: a) {
       switch (org.species) {
-                case Organism.BLUE:
-                    bOrgs.add(org);
-                    break;
-                case Organism.RED:
-                    rOrgs.add(org);
-                    break;
-                case Organism.YELLOW:
-                    yOrgs.add(org);
-                    break;
-                case Organism.ORANGE:
-                    oOrgs.add(org);
-                    break;
-                default:
-                    System.out.println(org.species + "??");
-            }
+        case Organism.BLUE:
+            bOrgs.add(org);
+            break;
+        case Organism.RED:
+            rOrgs.add(org);
+            break;
+        case Organism.YELLOW:
+            yOrgs.add(org);
+            break;
+        case Organism.ORANGE:
+            oOrgs.add(org);
+            break;
+        default:
+            System.out.println(org.species + "??");
+      }
     }
     a.clear();
   }
 
   public static void giveBack(int n) {
     if (n < 0) {
+      // Should never happen, energy leak
       System.out.println("Woah negative energy???");
-            Main.stop();
+      Main.stop();
     }
     energy += n;
   }
